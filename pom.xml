@@ -63,11 +63,13 @@
         </dependency>
     </dependencies>
 
-    <dependencyManagement><dependencies>
-        <dependency>
-            <groupId>com.uuhnaut69</groupId>
-            <artifactId>common</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-    </dependencies></dependencyManagement>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.uuhnaut69</groupId>
+                <artifactId>common</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 </project>
