@@ -20,6 +20,7 @@ public class OrderController {
   @PostMapping
   @ResponseStatus(HttpStatus.CREATED)
   public void placeOrder(@RequestBody @Valid OrderRequest orderRequest) {
+    log.info("Received new order request {}", orderRequest);
     orderService.placeOrder(orderRequest);
   }
 }

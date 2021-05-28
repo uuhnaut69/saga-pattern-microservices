@@ -49,5 +49,6 @@ public class OrderServiceImpl implements OrderService {
     var payload = mapper.convertValue(order, JsonNode.class);
     outbox.setPayload(payload);
     outBoxRepository.save(outbox);
+    log.info("Persisted order event {} to out_box table", outbox);
   }
 }
