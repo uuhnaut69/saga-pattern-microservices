@@ -105,7 +105,8 @@ public class EventHandler {
   private String getHeaderAsString(MessageHeaders headers, String name) {
     var value = headers.get(name, byte[].class);
     if (Objects.isNull(value)) {
-      throw new IllegalArgumentException("Expected record header '" + name + "' not present");
+      throw new IllegalArgumentException(
+          String.format("Expected record header %s not present", name));
     }
     return new String(value, StandardCharsets.UTF_8);
   }
