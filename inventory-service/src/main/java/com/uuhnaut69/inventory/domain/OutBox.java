@@ -1,9 +1,8 @@
-package com.uuhnaut69.order.domain;
+package com.uuhnaut69.inventory.domain;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Type;
@@ -17,7 +16,6 @@ import java.util.UUID;
 
 @Data
 @Entity
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @TypeDef(name = "jsonb", typeClass = JsonBinaryType.class)

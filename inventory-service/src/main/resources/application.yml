@@ -1,0 +1,28 @@
+server:
+  port: 9092
+spring:
+  application:
+    name: inventory-application
+  jpa:
+    show-sql: true
+    open-in-view: false
+    hibernate:
+      ddl-auto: update
+      use-new-id-generator-mappings: true
+    generate-ddl: true
+  datasource:
+    url: jdbc:postgresql://localhost:5434/postgres
+    username: postgres
+    password: postgres
+  cloud:
+    function:
+      definition: handleReserveProductStockRequest;handleCompensateProductStockRequest
+    stream:
+      kafka:
+        binder:
+          brokers: localhost:29092
+      bindings:
+        handleReserveProductStockRequest-in-0:
+          destination: outbox.event.RESERVE_PRODUCT_STOCK_REQUEST
+        handleCompensateProductStockRequest-in-0:
+          destination: outbox.event.COMPENSATE_PRODUCT_STOCK_REQUEST

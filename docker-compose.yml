@@ -12,6 +12,27 @@ services:
       - POSTGRES_PASSWORD=postgres
     restart: on-failure
 
+  customerdb:
+    container_name: customerdb
+    image: debezium/postgres
+    ports:
+      - 5433:5432
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    restart: on-failure
+
+  inventorydb:
+    container_name: inventorydb
+    image: debezium/postgres
+    ports:
+      - 5434:5432
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    restart: on-failure
 
   zookeeper:
     image: confluentinc/cp-zookeeper:6.0.1
@@ -100,6 +121,7 @@ services:
     command:
       "bash -c 'confluent-hub install --no-prompt debezium/debezium-connector-postgresql:latest &&\
       confluent-hub install --no-prompt confluentinc/kafka-connect-elasticsearch:latest && \
+      confluent-hub install --no-prompt jcustenborder/kafka-connect-transform-common:0.1.0.54 && \
       /etc/confluent/docker/run'"
 
   control-center:

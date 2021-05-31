@@ -14,8 +14,17 @@ spring:
     url: jdbc:postgresql://localhost:5432/postgres
     username: postgres
     password: postgres
-  kafka:
-    bootstrap-servers: localhost:29092
-    consumer:
-      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+  cloud:
+    function:
+      definition: startSaga;reserveCustomerBalanceStage;reserveProductStockStage
+    stream:
+      kafka:
+        binder:
+          brokers: localhost:29092
+      bindings:
+        startSaga-in-0:
+          destination: outbox.event.PLACE_ORDER_REQUEST
+        reserveCustomerBalanceStage-in-0:
+          destination: outbox.event.RESERVE_CUSTOMER_BALANCE_RESPONSE
+        reserveProductStockStage-in-0:
+          destination: outbox.event.RESERVE_PRODUCT_STOCK_RESPONSE

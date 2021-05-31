@@ -1,23 +1,10 @@
 package com.uuhnaut69.order.api.request;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import java.math.BigDecimal;
 import java.util.UUID;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-public class OrderRequest {
-
-  @NotNull private UUID customerId;
-
-  @NotNull private UUID productId;
-
-  @Min(1)
-  @NotNull
-  private Integer quantity;
+public record OrderRequest(@NotNull UUID customerId, @NotNull UUID productId, @Min(1)@NotNull Integer quantity,
+                           BigDecimal price) {
 }

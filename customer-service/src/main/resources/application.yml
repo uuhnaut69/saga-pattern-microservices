@@ -1,0 +1,29 @@
+server:
+  port: 9091
+spring:
+  application:
+    name: customer-application
+  jpa:
+    show-sql: true
+    open-in-view: false
+    hibernate:
+      ddl-auto: update
+      use-new-id-generator-mappings: true
+    generate-ddl: true
+  datasource:
+    url: jdbc:postgresql://localhost:5433/postgres
+    username: postgres
+    password: postgres
+  cloud:
+    function:
+      definition: handleReserveCustomerBalanceRequest;handleCompensateCustomerBalanceRequest
+    stream:
+      kafka:
+        binder:
+          brokers: localhost:29092
+      bindings:
+        handleReserveCustomerBalanceRequest-in-0:
+          destination: outbox.event.RESERVE_CUSTOMER_BALANCE_REQUEST
+        handleCompensateCustomerBalanceRequest-in-0:
+          destination: outbox.event.COMPENSATE_CUSTOMER_BALANCE_REQUEST
+

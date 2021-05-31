@@ -1,16 +1,9 @@
 package com.uuhnaut69.common;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import java.math.BigDecimal;
+import java.util.UUID;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-public class PlacedOrderEvent {
 
-  private String eventType;
+public record PlacedOrderEvent(UUID id, UUID customerId,UUID productId,BigDecimal price,Integer quantity) {
 
-  private JsonNode payload;
 }
