@@ -22,9 +22,7 @@ spring:
         binder:
           brokers: localhost:29092
       bindings:
-        startSaga-in-0:
-          destination: outbox.event.PLACE_ORDER_REQUEST
         reserveCustomerBalanceStage-in-0:
-          destination: outbox.event.RESERVE_CUSTOMER_BALANCE_RESPONSE
+          destination: CUSTOMER.events
         reserveProductStockStage-in-0:
-          destination: outbox.event.RESERVE_PRODUCT_STOCK_RESPONSE
+          destination: PRODUCT.events

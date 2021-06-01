@@ -23,7 +23,7 @@ spring:
           brokers: localhost:29092
       bindings:
         handleReserveCustomerBalanceRequest-in-0:
-          destination: outbox.event.RESERVE_CUSTOMER_BALANCE_REQUEST
+          destination: ORDER.events
         handleCompensateCustomerBalanceRequest-in-0:
-          destination: outbox.event.COMPENSATE_CUSTOMER_BALANCE_REQUEST
+          destination: ORDER.events
 

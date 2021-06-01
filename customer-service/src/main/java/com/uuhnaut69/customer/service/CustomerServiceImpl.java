@@ -3,7 +3,6 @@ package com.uuhnaut69.customer.service;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.uuhnaut69.common.PlacedOrderEvent;
-import com.uuhnaut69.common.SagaStep;
 import com.uuhnaut69.customer.api.exception.NotFoundException;
 import com.uuhnaut69.customer.api.request.CustomerRequest;
 import com.uuhnaut69.customer.domain.Customer;
@@ -17,8 +16,9 @@ import org.springframework.transaction.annotation.Transactional;
 import java.math.BigDecimal;
 import java.util.UUID;
 
-import static com.uuhnaut69.common.ReserveBalanceStatus.FAILED;
-import static com.uuhnaut69.common.ReserveBalanceStatus.SUCCESSFUL;
+import static com.uuhnaut69.common.AggregateType.CUSTOMER;
+import static com.uuhnaut69.common.EventType.RESERVE_CUSTOMER_BALANCE_FAILED;
+import static com.uuhnaut69.common.EventType.RESERVE_CUSTOMER_BALANCE_SUCCESSFULLY;
 
 @Service
 @Transactional
@@ -50,21 +50,21 @@ public class CustomerServiceImpl implements CustomerService {
     var outbox = new OutBox();
     outbox.setAggregateId(orderEvent.id());
     outbox.setPayload(mapper.convertValue(orderEvent, JsonNode.class));
-    outbox.setAggregateType(SagaStep.RESERVE_CUSTOMER_BALANCE_RESPONSE.name());
+    outbox.setAggregateType(CUSTOMER.name());
 
     if (customer
             .getBalance()
             .subtract(orderEvent.price().multiply(BigDecimal.valueOf(orderEvent.quantity())))
             .compareTo(BigDecimal.ZERO)
         < 0) {
-      outbox.setType(FAILED.name());
+      outbox.setType(RESERVE_CUSTOMER_BALANCE_FAILED.name());
     } else {
       customer.setBalance(
           customer
               .getBalance()
               .subtract(orderEvent.price().multiply(BigDecimal.valueOf(orderEvent.quantity()))));
       customerRepository.save(customer);
-      outbox.setType(SUCCESSFUL.name());
+      outbox.setType(RESERVE_CUSTOMER_BALANCE_SUCCESSFULLY.name());
     }
     outBoxRepository.save(outbox);
   }

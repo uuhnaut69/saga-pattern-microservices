@@ -8,12 +8,9 @@ import java.util.UUID;
 
 public interface ProductService {
 
-    Product findById(UUID productId);
+  Product findById(UUID productId);
 
-    Product create(ProductRequest productRequest);
+  Product create(ProductRequest productRequest);
 
-    void reserveProduct(PlacedOrderEvent orderEvent);
-
-    void compensateStock(PlacedOrderEvent orderEvent);
-
+  void reserveProduct(PlacedOrderEvent orderEvent);
 }

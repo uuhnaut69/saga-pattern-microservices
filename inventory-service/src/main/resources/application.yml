@@ -23,6 +23,4 @@ spring:
           brokers: localhost:29092
       bindings:
         handleReserveProductStockRequest-in-0:
-          destination: outbox.event.RESERVE_PRODUCT_STOCK_REQUEST
-        handleCompensateProductStockRequest-in-0:
-          destination: outbox.event.COMPENSATE_PRODUCT_STOCK_REQUEST
+          destination: ORDER.events

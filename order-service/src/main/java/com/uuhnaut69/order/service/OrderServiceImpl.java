@@ -2,7 +2,6 @@ package com.uuhnaut69.order.service;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.uuhnaut69.common.SagaStep;
 import com.uuhnaut69.order.api.request.OrderRequest;
 import com.uuhnaut69.order.domain.Order;
 import com.uuhnaut69.order.domain.OrderStatus;
@@ -19,6 +18,9 @@ import java.sql.Timestamp;
 import java.time.Instant;
 import java.util.UUID;
 
+import static com.uuhnaut69.common.AggregateType.ORDER;
+import static com.uuhnaut69.common.EventType.ORDER_CREATED;
+
 @Slf4j
 @Service
 @Transactional
@@ -31,8 +33,6 @@ public class OrderServiceImpl implements OrderService {
 
   private final OutBoxRepository outBoxRepository;
 
-  private static final String SUCCESSFUL = "SUCCESSFUL";
-
   @Override
   @SneakyThrows
   public void placeOrder(OrderRequest orderRequest) {
@@ -44,8 +44,8 @@ public class OrderServiceImpl implements OrderService {
     var outbox =
         OutBox.builder()
             .aggregateId(order.getId())
-            .aggregateType(SagaStep.PLACE_ORDER_REQUEST.name())
-            .type(SUCCESSFUL)
+            .aggregateType(ORDER.name())
+            .type(ORDER_CREATED.name())
             .payload(mapper.convertValue(order, JsonNode.class))
             .build();
     outBoxRepository.save(outbox);
