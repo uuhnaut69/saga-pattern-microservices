@@ -1,9 +1,11 @@
 # Saga Pattern Microservices
 
 Simple order flow to demo some concepts:
+
 - Microservices using `Spring Boot`, `Spring Cloud`, `Spring Cloud Stream`
 - Database per service using `Postgresql`
-- Saga Pattern (Saga Orchestration), Outbox Pattern: Distributed transaction span multiple services and avoid dual-writes using `Kafka`,`Kafka Connect`, `Debezium`
+- Saga Pattern (Saga Orchestration), Outbox Pattern: Distributed transaction span multiple services and avoid
+  dual-writes using `Kafka`,`Kafka Connect`, `Debezium`
 
 ## Get Started
 
@@ -23,7 +25,19 @@ docker-compose up -d
 
 Run services `order-service`, `customer-service`, `inventory-service`
 
-| Service's name | Endpoint |
+```shell
+./mvnw -f order-service/pom.xml spring-boot:run
+```
+
+```shell
+./mvnw -f customer-service/pom.xml spring-boot:run
+```
+
+```shell
+./mvnw -f inventory-service/pom.xml spring-boot:run
+```
+
+| Service's name | URL |
 | --- | --- |
 | Order service | localhost:9090 |
 | Customer service | localhost:9091 |
@@ -31,29 +45,10 @@ Run services `order-service`, `customer-service`, `inventory-service`
 
 ### Start outbox connectors
 
-Create outbox order connectors
+Create outbox connectors
 
 ```shell
-curl -X POST http://localhost:8083/connectors \
-  -H 'Content-Type: application/json' \
-  -H 'Accept: application/json' \
-  -d @outbox_order_connector.json
-```
-
-Create outbox customer connectors
-```shell
-curl -X POST http://localhost:8083/connectors \
-  -H 'Content-Type: application/json' \
-  -H 'Accept: application/json' \
-  -d @outbox_customer_connector.json
-```
-
-Create outbox inventory connectors
-```shell
-curl -X POST http://localhost:8083/connectors \
-  -H 'Content-Type: application/json' \
-  -H 'Accept: application/json' \
-  -d @outbox_inventory_connector.json
+sh register-connectors.sh
 ```
 
 ### Test
