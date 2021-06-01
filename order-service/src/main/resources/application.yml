@@ -4,7 +4,7 @@ spring:
   application:
     name: order-application
   jpa:
-    show-sql: true
+    show-sql: false
     open-in-view: false
     hibernate:
       ddl-auto: update

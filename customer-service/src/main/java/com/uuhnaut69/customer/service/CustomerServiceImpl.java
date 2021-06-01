@@ -40,7 +40,6 @@ public class CustomerServiceImpl implements CustomerService {
   @Override
   public Customer create(CustomerRequest customerRequest) {
     var customer = mapper.convertValue(customerRequest, Customer.class);
-    customer.setBalance(BigDecimal.valueOf(10000));
     return customerRepository.save(customer);
   }
 

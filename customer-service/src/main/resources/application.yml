@@ -4,7 +4,7 @@ spring:
   application:
     name: customer-application
   jpa:
-    show-sql: true
+    show-sql: false
     open-in-view: false
     hibernate:
       ddl-auto: update
