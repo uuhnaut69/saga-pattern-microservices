@@ -13,8 +13,47 @@ Simple order flow to demo some concepts:
 docker-compose up -d
 ```
 
-### Build projects:
+### Build projects
 
 ```shell
 ./mvnw clean install package -DskipTests=true
 ```
+
+### Start Services
+
+Run services `order-service`, `customer-service`, `inventory-service`
+
+| Service's name | Endpoint |
+| --- | --- |
+| Order service | localhost:9090 |
+| Customer service | localhost:9091 |
+| Inventory service | localhost:9092 |
+
+### Start outbox connectors
+
+Create outbox order connectors
+
+```shell
+curl -X POST http://localhost:8083/connectors \
+  -H 'Content-Type: application/json' \
+  -H 'Accept: application/json' \
+  -d @outbox_order_connector.json
+```
+
+Create outbox customer connectors
+```shell
+curl -X POST http://localhost:8083/connectors \
+  -H 'Content-Type: application/json' \
+  -H 'Accept: application/json' \
+  -d @outbox_customer_connector.json
+```
+
+Create outbox inventory connectors
+```shell
+curl -X POST http://localhost:8083/connectors \
+  -H 'Content-Type: application/json' \
+  -H 'Accept: application/json' \
+  -d @outbox_inventory_connector.json
+```
+
+### Test
