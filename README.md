@@ -7,6 +7,12 @@ Simple order flow to demo some concepts:
 - Saga Pattern (Saga Orchestration), Outbox Pattern: Distributed transaction span multiple services and avoid
   dual-writes using `Kafka`,`Kafka Connect`, `Debezium`
 
+## Prerequisites
+
+- `Java 16`
+- `Docker`
+- `Docker-compose`
+
 ## Get Started
 
 ### Setup environment
