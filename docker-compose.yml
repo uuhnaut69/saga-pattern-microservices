@@ -1,6 +1,15 @@
 version: "3.7"
 
 services:
+  consul:
+    container_name: consul
+    image: consul
+    ports:
+      - 8500:8500
+      - 8600:8600/tcp
+      - 8600:8600/udp
+    restart: on-failure
+
   orderdb:
     container_name: orderdb
     image: debezium/postgres
@@ -35,7 +44,7 @@ services:
     restart: on-failure
 
   zookeeper:
-    image: confluentinc/cp-zookeeper:6.0.1
+    image: confluentinc/cp-zookeeper:6.1.1
     hostname: zookeeper
     container_name: zookeeper
     ports:
@@ -45,7 +54,7 @@ services:
       ZOOKEEPER_TICK_TIME: 2000
 
   broker:
-    image: confluentinc/cp-kafka:6.0.1
+    image: confluentinc/cp-kafka:6.1.1
     hostname: broker
     container_name: broker
     depends_on:
@@ -73,7 +82,7 @@ services:
       CONFLUENT_SUPPORT_CUSTOMER_ID: 'anonymous'
 
   schema-registry:
-    image: confluentinc/cp-schema-registry:6.0.1
+    image: confluentinc/cp-schema-registry:6.1.1
     hostname: schema-registry
     container_name: schema-registry
     depends_on:
@@ -86,7 +95,7 @@ services:
       SCHEMA_REGISTRY_LOG4J_ROOT_LOGLEVEL: WARN
 
   connect:
-    image: confluentinc/cp-kafka-connect:6.0.1
+    image: confluentinc/cp-kafka-connect:6.1.1
     hostname: connect
     container_name: connect
     depends_on:
@@ -113,7 +122,7 @@ services:
       CONNECT_INTERNAL_KEY_CONVERTER: "org.apache.kafka.connect.json.JsonConverter"
       CONNECT_INTERNAL_VALUE_CONVERTER: "org.apache.kafka.connect.json.JsonConverter"
       # CLASSPATH required due to CC-2422
-      CLASSPATH: /usr/share/java/monitoring-interceptors/monitoring-interceptors-6.0.1.jar
+      CLASSPATH: /usr/share/java/monitoring-interceptors/monitoring-interceptors-6.1.1.jar
       CONNECT_PRODUCER_INTERCEPTOR_CLASSES: "io.confluent.monitoring.clients.interceptor.MonitoringProducerInterceptor"
       CONNECT_CONSUMER_INTERCEPTOR_CLASSES: "io.confluent.monitoring.clients.interceptor.MonitoringConsumerInterceptor"
       CONNECT_PLUGIN_PATH: "/usr/share/java,/usr/share/confluent-hub-components"
@@ -121,11 +130,11 @@ services:
     command:
       "bash -c 'confluent-hub install --no-prompt debezium/debezium-connector-postgresql:latest &&\
       confluent-hub install --no-prompt confluentinc/kafka-connect-elasticsearch:latest && \
-      confluent-hub install --no-prompt jcustenborder/kafka-connect-transform-common:0.1.0.54 && \
+      confluent-hub install --no-prompt jcustenborder/kafka-connect-transform-common:latest && \
       /etc/confluent/docker/run'"
 
   control-center:
-    image: confluentinc/cp-enterprise-control-center:6.0.1
+    image: confluentinc/cp-enterprise-control-center:6.1.1
     hostname: control-center
     container_name: control-center
     depends_on:

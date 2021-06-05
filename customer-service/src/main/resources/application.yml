@@ -2,7 +2,7 @@ server:
   port: 9091
 spring:
   application:
-    name: customer-application
+    name: customer-service
   jpa:
     show-sql: false
     open-in-view: false
@@ -15,6 +15,9 @@ spring:
     username: postgres
     password: postgres
   cloud:
+    consul:
+      host: ${CONSUL_HOST:localhost}
+      port: ${CONSUL_PORT:8500}
     function:
       definition: handleReserveCustomerBalanceRequest;handleCompensateCustomerBalanceRequest
     stream:
