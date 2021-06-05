@@ -1,4 +1,4 @@
-package com.uuhnaut69.common;
+package com.uuhnaut69.common.event;
 
 public enum EventType {
   ORDER_CREATED,

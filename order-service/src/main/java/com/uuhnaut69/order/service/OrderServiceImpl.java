@@ -18,8 +18,8 @@ import java.sql.Timestamp;
 import java.time.Instant;
 import java.util.UUID;
 
-import static com.uuhnaut69.common.AggregateType.ORDER;
-import static com.uuhnaut69.common.EventType.ORDER_CREATED;
+import static com.uuhnaut69.common.event.AggregateType.ORDER;
+import static com.uuhnaut69.common.event.EventType.ORDER_CREATED;
 
 @Slf4j
 @Service

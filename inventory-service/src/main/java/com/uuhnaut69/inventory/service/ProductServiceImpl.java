@@ -2,8 +2,8 @@ package com.uuhnaut69.inventory.service;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.uuhnaut69.common.PlacedOrderEvent;
-import com.uuhnaut69.inventory.api.exception.NotFoundException;
+import com.uuhnaut69.common.event.PlacedOrderEvent;
+import com.uuhnaut69.common.exception.NotFoundException;
 import com.uuhnaut69.inventory.api.request.ProductRequest;
 import com.uuhnaut69.inventory.domain.OutBox;
 import com.uuhnaut69.inventory.domain.Product;
@@ -16,9 +16,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.UUID;
 
-import static com.uuhnaut69.common.AggregateType.PRODUCT;
-import static com.uuhnaut69.common.EventType.RESERVE_PRODUCT_STOCK_FAILED;
-import static com.uuhnaut69.common.EventType.RESERVE_PRODUCT_STOCK_SUCCESSFULLY;
+import static com.uuhnaut69.common.event.AggregateType.PRODUCT;
+import static com.uuhnaut69.common.event.EventType.RESERVE_PRODUCT_STOCK_FAILED;
+import static com.uuhnaut69.common.event.EventType.RESERVE_PRODUCT_STOCK_SUCCESSFULLY;
 
 @Slf4j
 @Service
@@ -60,5 +60,4 @@ public class ProductServiceImpl implements ProductService {
     }
     outBoxRepository.save(outbox);
   }
-
 }

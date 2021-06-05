@@ -3,7 +3,7 @@ package com.uuhnaut69.order.listeners;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.uuhnaut69.common.PlacedOrderEvent;
+import com.uuhnaut69.common.event.PlacedOrderEvent;
 import com.uuhnaut69.order.domain.OutBox;
 import com.uuhnaut69.order.messagelog.MessageLogService;
 import com.uuhnaut69.order.repository.OutBoxRepository;
@@ -20,8 +20,8 @@ import java.nio.charset.StandardCharsets;
 import java.util.Objects;
 import java.util.function.Consumer;
 
-import static com.uuhnaut69.common.AggregateType.ORDER;
-import static com.uuhnaut69.common.EventType.*;
+import static com.uuhnaut69.common.event.AggregateType.ORDER;
+import static com.uuhnaut69.common.event.EventType.*;
 
 @Slf4j
 @Component

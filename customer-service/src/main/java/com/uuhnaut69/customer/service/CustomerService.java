@@ -1,6 +1,6 @@
 package com.uuhnaut69.customer.service;
 
-import com.uuhnaut69.common.PlacedOrderEvent;
+import com.uuhnaut69.common.event.PlacedOrderEvent;
 import com.uuhnaut69.customer.api.request.CustomerRequest;
 import com.uuhnaut69.customer.domain.Customer;
 

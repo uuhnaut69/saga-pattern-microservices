@@ -2,7 +2,7 @@ package com.uuhnaut69.inventory.listeners;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.uuhnaut69.common.PlacedOrderEvent;
+import com.uuhnaut69.common.event.PlacedOrderEvent;
 import com.uuhnaut69.inventory.messagelog.MessageLogService;
 import com.uuhnaut69.inventory.service.ProductService;
 import lombok.RequiredArgsConstructor;
@@ -17,7 +17,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Objects;
 import java.util.function.Consumer;
 
-import static com.uuhnaut69.common.EventType.RESERVE_CUSTOMER_BALANCE_SUCCESSFULLY;
+import static com.uuhnaut69.common.event.EventType.RESERVE_CUSTOMER_BALANCE_SUCCESSFULLY;
 
 @Slf4j
 @Component

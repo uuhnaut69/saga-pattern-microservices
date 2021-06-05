@@ -2,8 +2,8 @@ package com.uuhnaut69.customer.service;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.uuhnaut69.common.PlacedOrderEvent;
-import com.uuhnaut69.customer.api.exception.NotFoundException;
+import com.uuhnaut69.common.event.PlacedOrderEvent;
+import com.uuhnaut69.common.exception.NotFoundException;
 import com.uuhnaut69.customer.api.request.CustomerRequest;
 import com.uuhnaut69.customer.domain.Customer;
 import com.uuhnaut69.customer.domain.OutBox;
@@ -16,9 +16,9 @@ import org.springframework.transaction.annotation.Transactional;
 import java.math.BigDecimal;
 import java.util.UUID;
 
-import static com.uuhnaut69.common.AggregateType.CUSTOMER;
-import static com.uuhnaut69.common.EventType.RESERVE_CUSTOMER_BALANCE_FAILED;
-import static com.uuhnaut69.common.EventType.RESERVE_CUSTOMER_BALANCE_SUCCESSFULLY;
+import static com.uuhnaut69.common.event.AggregateType.CUSTOMER;
+import static com.uuhnaut69.common.event.EventType.RESERVE_CUSTOMER_BALANCE_FAILED;
+import static com.uuhnaut69.common.event.EventType.RESERVE_CUSTOMER_BALANCE_SUCCESSFULLY;
 
 @Service
 @Transactional
