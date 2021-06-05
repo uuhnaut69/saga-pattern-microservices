@@ -16,9 +16,9 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.uuhnaut69</groupId>
-    <artifactId>micorservices</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
-    <name>micorservices</name>
+    <artifactId>microservices</artifactId>
+    <version>2.5.0</version>
+    <name>microservices</name>
     <description>Demo project for Spring Boot</description>
     <properties>
         <java.version>16</java.version>
@@ -82,7 +82,7 @@
             <dependency>
                 <groupId>com.uuhnaut69</groupId>
                 <artifactId>common</artifactId>
-                <version>0.0.1-SNAPSHOT</version>
+                <version>2.5.0</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
