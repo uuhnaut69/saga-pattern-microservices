@@ -29,7 +29,11 @@ docker-compose up -d
 
 ### Start Services
 
-Run services `order-service`, `customer-service`, `inventory-service`
+Run services `api-gateway`, `order-service`, `customer-service`, `inventory-service`
+
+```shell
+./mvnw -f api-gateway/pom.xml spring-boot:run
+```
 
 ```shell
 ./mvnw -f order-service/pom.xml spring-boot:run
@@ -45,6 +49,7 @@ Run services `order-service`, `customer-service`, `inventory-service`
 
 | Service's name | URL |
 | --- | --- |
+|Api Gateway | localhost:8080 |
 | Order service | localhost:9090 |
 | Customer service | localhost:9091 |
 | Inventory service | localhost:9092 |
