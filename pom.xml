@@ -18,7 +18,7 @@
     </parent>
     <groupId>com.uuhnaut69</groupId>
     <artifactId>microservices</artifactId>
-    <version>2.5.0</version>
+    <version>1.0.0</version>
     <name>microservices</name>
     <description>Demo project for Spring Boot</description>
     <properties>
