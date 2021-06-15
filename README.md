@@ -1,4 +1,6 @@
 # Saga Pattern Microservices
+![CircleCI](https://img.shields.io/circleci/build/github/uuhnaut69/saga-pattern-microservices/master?logo=circleci&style=for-the-badge)
+![Maven Central](https://img.shields.io/maven-central/v/org.springframework.boot/spring-boot-starter-parent?color=green&label=spring-boot&logo=spring-boot&logoColor=green&style=for-the-badge)
 
 Simple order flow to demo some concepts:
 
