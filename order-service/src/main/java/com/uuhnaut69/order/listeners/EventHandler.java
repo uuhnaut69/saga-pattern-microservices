@@ -49,9 +49,9 @@ public class EventHandler {
               OutBox.builder()
                   .aggregateId(placedOrderEvent.id())
                   .payload(mapper.convertValue(placedOrderEvent, JsonNode.class))
+                  .aggregateType(ORDER.name())
+                  .type(RESERVE_CUSTOMER_BALANCE_SUCCESSFULLY.name())
                   .build();
-          outbox.setAggregateType(ORDER.name());
-          outbox.setType(RESERVE_CUSTOMER_BALANCE_SUCCESSFULLY.name());
           outBoxRepository.save(outbox);
         } else if (eventType.equals(RESERVE_CUSTOMER_BALANCE_FAILED.name())) {
           orderService.updateOrderStatus(placedOrderEvent.id(), false);
