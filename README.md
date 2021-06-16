@@ -1,6 +1,7 @@
 # Saga Pattern Microservices
-![CircleCI](https://img.shields.io/circleci/build/github/uuhnaut69/saga-pattern-microservices/master?logo=circleci&style=for-the-badge)
-![Maven Central](https://img.shields.io/maven-central/v/org.springframework.boot/spring-boot-starter-parent?color=green&label=spring-boot&logo=spring-boot&logoColor=green&style=for-the-badge)
+![CircleCI](https://img.shields.io/circleci/build/github/uuhnaut69/saga-pattern-microservices/master?color=green&logo=circleci&style=for-the-badge)
+![Maven Central](https://img.shields.io/maven-central/v/org.springframework.boot/spring-boot-starter-parent?color=green&label=spring-boot&logo=spring-boot&style=for-the-badge)
+![Docker Image Version (tag latest semver)](https://img.shields.io/docker/v/confluentinc/cp-kafka/6.2.0?color=green&label=confluent&logo=apache-kafka&logoColor=green&style=for-the-badge)
 
 Simple order flow to demo some concepts:
 
