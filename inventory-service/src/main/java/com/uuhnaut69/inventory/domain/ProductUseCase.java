@@ -30,6 +30,7 @@ public class ProductUseCase implements ProductUseCasePort {
   @Override
   public Product create(ProductRequest productRequest) {
     var product = mapper.convertValue(productRequest, Product.class);
+    product.setId(UUID.randomUUID());
     return productRepository.saveProduct(product);
   }
 
