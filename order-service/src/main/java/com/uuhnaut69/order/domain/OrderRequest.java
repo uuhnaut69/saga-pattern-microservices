@@ -1,4 +1,4 @@
-package com.uuhnaut69.order.api.request;
+package com.uuhnaut69.order.domain;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;

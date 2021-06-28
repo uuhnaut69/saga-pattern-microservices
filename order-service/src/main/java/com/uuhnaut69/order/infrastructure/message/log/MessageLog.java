@@ -1,4 +1,4 @@
-package com.uuhnaut69.order.messagelog;
+package com.uuhnaut69.order.infrastructure.message.log;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

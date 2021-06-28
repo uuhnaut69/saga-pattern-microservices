@@ -1,4 +1,4 @@
-package com.uuhnaut69.order.domain;
+package com.uuhnaut69.order.infrastructure.message.outbox;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.vladmihalcea.hibernate.type.json.JsonBinaryType;

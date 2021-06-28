@@ -1,10 +1,10 @@
-package com.uuhnaut69.order.service;
+package com.uuhnaut69.order.domain.port;
 
-import com.uuhnaut69.order.api.request.OrderRequest;
+import com.uuhnaut69.order.domain.OrderRequest;
 
 import java.util.UUID;
 
-public interface OrderService {
+public interface OrderUseCasePort {
 
   void placeOrder(OrderRequest orderRequest);
 

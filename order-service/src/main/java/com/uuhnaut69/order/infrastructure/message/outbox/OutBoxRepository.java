@@ -1,4 +1,4 @@
-package com.uuhnaut69.order.messagelog;
+package com.uuhnaut69.order.infrastructure.message.outbox;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -6,4 +6,4 @@ import org.springframework.stereotype.Repository;
 import java.util.UUID;
 
 @Repository
-public interface MessageLogRepository extends JpaRepository<MessageLog, UUID> {}
+public interface OutBoxRepository extends JpaRepository<OutBox, UUID> {}

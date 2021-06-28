@@ -1,5 +1,6 @@
-package com.uuhnaut69.order.domain;
+package com.uuhnaut69.order.infrastructure.repository;
 
+import com.uuhnaut69.order.domain.entity.OrderStatus;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,9 +14,9 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity(name = "orders")
-public class Order {
+public class OrderEntity {
 
-  @Id @GeneratedValue private UUID id;
+  @Id private UUID id;
 
   @Column(nullable = false)
   private UUID customerId;
