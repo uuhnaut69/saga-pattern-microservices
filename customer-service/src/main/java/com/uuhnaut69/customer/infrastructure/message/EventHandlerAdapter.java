@@ -12,6 +12,7 @@ import com.uuhnaut69.customer.infrastructure.message.outbox.OutBox;
 import com.uuhnaut69.customer.infrastructure.message.outbox.OutBoxRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.annotation.Bean;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageHeaders;
 import org.springframework.stereotype.Component;
@@ -47,6 +48,7 @@ public class EventHandlerAdapter implements EventHandlerPort {
   private static final String RESERVE_CUSTOMER_BALANCE_SUCCESSFULLY =
       "RESERVE_CUSTOMER_BALANCE_SUCCESSFULLY";
 
+  @Bean
   @Override
   @Transactional
   public Consumer<Message<String>> handleReserveCustomerBalanceRequest() {
@@ -79,6 +81,7 @@ public class EventHandlerAdapter implements EventHandlerPort {
     };
   }
 
+  @Bean
   @Override
   @Transactional
   public Consumer<Message<String>> handleCompensateCustomerBalanceRequest() {

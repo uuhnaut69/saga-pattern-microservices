@@ -4,7 +4,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.uuhnaut69.order.domain.PlacedOrderEvent;
-import com.uuhnaut69.order.domain.entity.Order;
 import com.uuhnaut69.order.domain.port.EventHandlerPort;
 import com.uuhnaut69.order.domain.port.OrderUseCasePort;
 import com.uuhnaut69.order.infrastructure.message.log.MessageLog;
@@ -38,9 +37,9 @@ public class EventHandlerAdapter implements EventHandlerPort {
 
   private final OutBoxRepository outBoxRepository;
 
-  private static final String ORDER = "ORDER";
+  public static final String ORDER = "ORDER";
 
-  private static final String ORDER_CREATED = "ORDER_CREATED";
+  public static final String ORDER_CREATED = "ORDER_CREATED";
 
   private static final String RESERVE_CUSTOMER_BALANCE_SUCCESSFULLY =
       "RESERVE_CUSTOMER_BALANCE_SUCCESSFULLY";
@@ -53,19 +52,6 @@ public class EventHandlerAdapter implements EventHandlerPort {
   private static final String RESERVE_PRODUCT_STOCK_FAILED = "RESERVE_PRODUCT_STOCK_FAILED";
 
   private static final String COMPENSATE_CUSTOMER_BALANCE = "COMPENSATE_CUSTOMER_BALANCE";
-
-  @Override
-  @Transactional
-  public void exportOutBoxEvent(Order order) {
-    var outbox =
-        OutBox.builder()
-            .aggregateId(order.getId())
-            .aggregateType(ORDER)
-            .type(ORDER_CREATED)
-            .payload(mapper.convertValue(order, JsonNode.class))
-            .build();
-    outBoxRepository.save(outbox);
-  }
 
   @Bean
   @Override

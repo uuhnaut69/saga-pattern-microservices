@@ -10,4 +10,6 @@ public interface OrderRepositoryPort {
   Optional<Order> findOrderById(UUID orderId);
 
   void saveOrder(Order order);
+
+  void exportOutBoxEvent(Order order);
 }
