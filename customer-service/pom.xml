@@ -26,10 +26,6 @@
             <scope>runtime</scope>
         </dependency>
         <dependency>
-            <groupId>com.uuhnaut69</groupId>
-            <artifactId>common</artifactId>
-        </dependency>
-        <dependency>
             <groupId>com.vladmihalcea</groupId>
             <artifactId>hibernate-types-52</artifactId>
             <version>${hibernate-types-52.version}</version>

@@ -1,8 +1,8 @@
 package com.uuhnaut69.inventory.api;
 
-import com.uuhnaut69.inventory.api.request.ProductRequest;
-import com.uuhnaut69.inventory.domain.Product;
-import com.uuhnaut69.inventory.service.ProductService;
+import com.uuhnaut69.inventory.domain.ProductRequest;
+import com.uuhnaut69.inventory.domain.entity.Product;
+import com.uuhnaut69.inventory.domain.port.ProductUseCasePort;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -17,17 +17,17 @@ import java.util.UUID;
 @RequestMapping("/products")
 public class ProductController {
 
-  private final ProductService productService;
+  private final ProductUseCasePort productUseCase;
 
   @PostMapping
   @ResponseStatus(HttpStatus.CREATED)
   public Product create(@RequestBody @Valid ProductRequest productRequest) {
     log.info("Create new product {}", productRequest);
-    return productService.create(productRequest);
+    return productUseCase.create(productRequest);
   }
 
   @GetMapping("/{productId}")
   public Product findById(@PathVariable UUID productId) {
-    return productService.findById(productId);
+    return productUseCase.findById(productId);
   }
 }
