@@ -1,4 +1,4 @@
-package com.uuhnaut69.customer.infrastructure.message.outbox;
+package com.uuhnaut69.inventory.infrastructure.message.outbox;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

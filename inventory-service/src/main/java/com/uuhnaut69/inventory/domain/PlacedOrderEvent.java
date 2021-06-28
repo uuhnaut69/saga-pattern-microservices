@@ -1,4 +1,4 @@
-package com.uuhnaut69.customer.domain;
+package com.uuhnaut69.inventory.domain;
 
 import java.math.BigDecimal;
 import java.util.UUID;

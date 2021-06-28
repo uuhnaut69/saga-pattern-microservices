@@ -1,4 +1,4 @@
-package com.uuhnaut69.inventory.api.request;
+package com.uuhnaut69.inventory.domain;
 
 import javax.validation.constraints.NotBlank;
 

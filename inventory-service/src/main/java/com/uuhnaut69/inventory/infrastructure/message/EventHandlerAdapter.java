@@ -1,10 +1,15 @@
-package com.uuhnaut69.inventory.listeners;
+package com.uuhnaut69.inventory.infrastructure.message;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.uuhnaut69.common.event.PlacedOrderEvent;
-import com.uuhnaut69.inventory.messagelog.MessageLogService;
-import com.uuhnaut69.inventory.service.ProductService;
+import com.uuhnaut69.inventory.domain.PlacedOrderEvent;
+import com.uuhnaut69.inventory.domain.port.EventHandlerPort;
+import com.uuhnaut69.inventory.domain.port.ProductUseCasePort;
+import com.uuhnaut69.inventory.infrastructure.message.log.MessageLog;
+import com.uuhnaut69.inventory.infrastructure.message.log.MessageLogRepository;
+import com.uuhnaut69.inventory.infrastructure.message.outbox.OutBox;
+import com.uuhnaut69.inventory.infrastructure.message.outbox.OutBoxRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
@@ -14,36 +19,63 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.nio.charset.StandardCharsets;
+import java.sql.Timestamp;
+import java.time.Instant;
 import java.util.Objects;
 import java.util.function.Consumer;
-
-import static com.uuhnaut69.common.event.EventType.RESERVE_CUSTOMER_BALANCE_SUCCESSFULLY;
 
 @Slf4j
 @Component
 @RequiredArgsConstructor
-public class EventHandler {
+public class EventHandlerAdapter implements EventHandlerPort {
 
   private final ObjectMapper mapper;
 
-  private final MessageLogService logService;
+  private final ProductUseCasePort productUseCase;
 
-  private final ProductService productService;
+  private final MessageLogRepository messageLogRepository;
+
+  private final OutBoxRepository outBoxRepository;
+
+  private static final String PRODUCT = "PRODUCT";
+
+  private static final String RESERVE_CUSTOMER_BALANCE_SUCCESSFULLY =
+      "RESERVE_CUSTOMER_BALANCE_SUCCESSFULLY";
+
+  private static final String RESERVE_PRODUCT_STOCK_FAILED = "RESERVE_PRODUCT_STOCK_FAILED";
+
+  private static final String RESERVE_PRODUCT_STOCK_SUCCESSFULLY =
+      "RESERVE_PRODUCT_STOCK_SUCCESSFULLY";
 
   @Bean
+  @Override
   @Transactional
   public Consumer<Message<String>> handleReserveProductStockRequest() {
     return event -> {
       var messageId = event.getHeaders().getId();
-      if (!logService.isProcessed(messageId)) {
+      if (Objects.nonNull(messageId) && !messageLogRepository.existsById(messageId)) {
         var eventType = getHeaderAsString(event.getHeaders(), "eventType");
-        if (eventType.equals(RESERVE_CUSTOMER_BALANCE_SUCCESSFULLY.name())) {
+        if (eventType.equals(RESERVE_CUSTOMER_BALANCE_SUCCESSFULLY)) {
           var placedOrderEvent = deserialize(event.getPayload());
-          log.info("Start process reserve product stock {}", placedOrderEvent);
-          productService.reserveProduct(placedOrderEvent);
-          log.info("Done process reserve product stock {}", placedOrderEvent);
+
+          log.debug("Start process reserve product stock {}", placedOrderEvent);
+          var outbox = new OutBox();
+          outbox.setAggregateId(placedOrderEvent.id());
+          outbox.setAggregateType(PRODUCT);
+          outbox.setPayload(mapper.convertValue(placedOrderEvent, JsonNode.class));
+
+          if (productUseCase.reserveProduct(placedOrderEvent)) {
+            outbox.setType(RESERVE_PRODUCT_STOCK_SUCCESSFULLY);
+          } else {
+            outbox.setType(RESERVE_PRODUCT_STOCK_FAILED);
+          }
+
+          // Exported event into outbox table
+          outBoxRepository.save(outbox);
+          log.debug("Done process reserve product stock {}", placedOrderEvent);
         }
-        logService.markAsProcessed(messageId);
+        // Marked message is processed
+        messageLogRepository.save(new MessageLog(messageId, Timestamp.from(Instant.now())));
       }
     };
   }
