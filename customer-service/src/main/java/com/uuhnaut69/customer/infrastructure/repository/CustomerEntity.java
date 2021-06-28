@@ -1,4 +1,4 @@
-package com.uuhnaut69.customer.domain;
+package com.uuhnaut69.customer.infrastructure.repository;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.math.BigDecimal;
 import java.util.UUID;
@@ -15,9 +14,9 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity(name = "customers")
-public class Customer {
+public class CustomerEntity {
 
-  @Id @GeneratedValue private UUID id;
+  @Id private UUID id;
 
   @Column(nullable = false, unique = true)
   private String username;

@@ -1,4 +1,4 @@
-package com.uuhnaut69.customer.api.request;
+package com.uuhnaut69.customer.domain;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
