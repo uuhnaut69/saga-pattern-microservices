@@ -1,4 +1,4 @@
-package com.uuhnaut69.customer.domain.ports;
+package com.uuhnaut69.customer.domain.port;
 
 import com.uuhnaut69.customer.domain.CustomerRequest;
 import com.uuhnaut69.customer.domain.PlacedOrderEvent;

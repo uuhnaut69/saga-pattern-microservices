@@ -2,7 +2,7 @@ package com.uuhnaut69.customer.infrastructure.repository;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.uuhnaut69.customer.domain.entity.Customer;
-import com.uuhnaut69.customer.domain.ports.CustomerRepositoryPort;
+import com.uuhnaut69.customer.domain.port.CustomerRepositoryPort;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 

@@ -1,6 +1,5 @@
-package com.uuhnaut69.inventory.repository;
+package com.uuhnaut69.customer.infrastructure.message.outbox;
 
-import com.uuhnaut69.inventory.domain.OutBox;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
