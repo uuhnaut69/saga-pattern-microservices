@@ -1,4 +1,5 @@
 # Saga Pattern Microservices
+
 ![CircleCI](https://img.shields.io/circleci/build/github/uuhnaut69/saga-pattern-microservices/master?color=green&logo=circleci&style=for-the-badge)
 ![Maven Central](https://img.shields.io/maven-central/v/org.springframework.boot/spring-boot-starter-parent?color=green&label=spring-boot&logo=spring-boot&style=for-the-badge)
 ![Docker Image Version (tag latest semver)](https://img.shields.io/docker/v/confluentinc/cp-kafka/6.2.0?color=green&label=confluent&logo=apache-kafka&logoColor=green&style=for-the-badge)
@@ -7,8 +8,8 @@ Simple order flow to demo some concepts:
 
 - Microservices using `Spring Boot`, `Spring Cloud`, `Spring Cloud Stream`
 - Database per service using `Postgresql`
-- Saga Pattern (Saga Orchestration), Outbox Pattern: Distributed transaction span multiple services and avoid
-  dual-writes using `Kafka`,`Kafka Connect`, `Debezium`
+- Saga Pattern (Saga Orchestration): Distributed transaction span multiple services.
+- Outbox Pattern: Avoid dual-writes, no 2PC required using `Kafka`,`Kafka Connect`, `Debezium`, `Outbox Event Router`
 
 ## Prerequisites
 
@@ -27,7 +28,7 @@ docker-compose up -d
 ### Build projects
 
 ```shell
-./mvnw clean install package -DskipTests=true
+./mvnw clean package -DskipTests=true
 ```
 
 ### Start Services
@@ -50,7 +51,7 @@ Run services `api-gateway`, `order-service`, `customer-service`, `inventory-serv
 ./mvnw -f inventory-service/pom.xml spring-boot:run
 ```
 
-| Service's name | URL |
+| Service's name | Endpoint |
 | --- | --- |
 |Api Gateway | localhost:8080 |
 | Order service | localhost:9090 |
@@ -63,6 +64,14 @@ Create outbox connectors
 
 ```shell
 sh register-connectors.sh
+```
+
+### Clean Up
+
+Delete all connectors
+
+```shell
+sh delete-connectors.sh
 ```
 
 ### Test
