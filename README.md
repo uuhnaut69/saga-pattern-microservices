@@ -74,4 +74,8 @@ Delete all connectors
 sh delete-connectors.sh
 ```
 
-### Test
+### Todo
+
+- [ ] Authentication
+- [ ] K8s deployment (services/infrastructure)
+- [ ] Web demo
