@@ -53,7 +53,7 @@ public class EventHandlerAdapter implements EventHandlerPort {
   public Consumer<Message<String>> handleReserveCustomerBalanceRequest() {
     return event -> {
       var messageId = event.getHeaders().getId();
-      if (Objects.nonNull(messageId) && !messageLogRepository.existsById(messageId)) {
+      if (Objects.nonNull(messageId) && !messageLogRepository.isMessageProcessed(messageId)) {
         var eventType = getHeaderAsString(event.getHeaders(), "eventType");
         if (eventType.equals(ORDER_CREATED)) {
           var placedOrderEvent = deserialize(event.getPayload());

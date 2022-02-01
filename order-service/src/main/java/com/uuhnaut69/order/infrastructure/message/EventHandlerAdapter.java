@@ -10,6 +10,11 @@ import com.uuhnaut69.order.infrastructure.message.log.MessageLog;
 import com.uuhnaut69.order.infrastructure.message.log.MessageLogRepository;
 import com.uuhnaut69.order.infrastructure.message.outbox.OutBox;
 import com.uuhnaut69.order.infrastructure.message.outbox.OutBoxRepository;
+import java.nio.charset.StandardCharsets;
+import java.sql.Timestamp;
+import java.time.Instant;
+import java.util.Objects;
+import java.util.function.Consumer;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
@@ -17,12 +22,6 @@ import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageHeaders;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.nio.charset.StandardCharsets;
-import java.sql.Timestamp;
-import java.time.Instant;
-import java.util.Objects;
-import java.util.function.Consumer;
 
 @Slf4j
 @Component
@@ -59,7 +58,7 @@ public class EventHandlerAdapter implements EventHandlerPort {
   public Consumer<Message<String>> reserveCustomerBalanceStage() {
     return event -> {
       var messageId = event.getHeaders().getId();
-      if (Objects.nonNull(messageId) && !messageLogRepository.existsById(messageId)) {
+      if (Objects.nonNull(messageId) && !messageLogRepository.isMessageProcessed(messageId)) {
         var placedOrderEvent = deserialize(event.getPayload());
         var eventType = getHeaderAsString(event.getHeaders(), "eventType");
         if (eventType.equals(RESERVE_CUSTOMER_BALANCE_SUCCESSFULLY)) {
