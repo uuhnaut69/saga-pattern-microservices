@@ -13,7 +13,7 @@ Simple order flow to demo some concepts:
 
 ## Prerequisites
 
-- `Java 16`
+- `Java 17`
 - `Docker`
 - `Docker-compose`
 

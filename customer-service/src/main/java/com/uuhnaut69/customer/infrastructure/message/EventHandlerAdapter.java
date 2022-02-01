@@ -10,6 +10,11 @@ import com.uuhnaut69.customer.infrastructure.message.log.MessageLog;
 import com.uuhnaut69.customer.infrastructure.message.log.MessageLogRepository;
 import com.uuhnaut69.customer.infrastructure.message.outbox.OutBox;
 import com.uuhnaut69.customer.infrastructure.message.outbox.OutBoxRepository;
+import java.nio.charset.StandardCharsets;
+import java.sql.Timestamp;
+import java.time.Instant;
+import java.util.Objects;
+import java.util.function.Consumer;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
@@ -17,12 +22,6 @@ import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageHeaders;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.nio.charset.StandardCharsets;
-import java.sql.Timestamp;
-import java.time.Instant;
-import java.util.Objects;
-import java.util.function.Consumer;
 
 @Slf4j
 @Component
@@ -103,12 +102,12 @@ public class EventHandlerAdapter implements EventHandlerPort {
   }
 
   private PlacedOrderEvent deserialize(String event) {
-    PlacedOrderEvent placedOrderEvent = null;
+    PlacedOrderEvent placedOrderEvent;
     try {
       String unescaped = mapper.readValue(event, String.class);
       placedOrderEvent = mapper.readValue(unescaped, PlacedOrderEvent.class);
     } catch (JsonProcessingException e) {
-      e.printStackTrace();
+      throw new RuntimeException("Couldn't deserialize event", e);
     }
     return placedOrderEvent;
   }
