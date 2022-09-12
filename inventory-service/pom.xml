@@ -12,7 +12,7 @@
     <artifactId>inventory-service</artifactId>
 
     <properties>
-        <hibernate-types-52.version>2.19.0</hibernate-types-52.version>
+        <hibernate-types-52.version>2.19.2</hibernate-types-52.version>
     </properties>
 
     <dependencies>
