@@ -9,7 +9,8 @@ Simple order flow to demo some concepts:
 - Microservices using `Spring Boot`, `Spring Cloud`, `Spring Cloud Stream`
 - Database per service using `Postgresql`
 - Saga Pattern (Saga Orchestration): Distributed transaction span multiple services.
-- Outbox Pattern: Avoid dual-writes, no 2PC required using `Kafka`,`Kafka Connect`, `Debezium`, `Outbox Event Router`
+- Outbox Pattern: Avoid dual-writes, no 2PC required using `Kafka`,`Kafka Connect`, `Debezium`
+  , `Outbox Event Router`
 
 ## Prerequisites
 

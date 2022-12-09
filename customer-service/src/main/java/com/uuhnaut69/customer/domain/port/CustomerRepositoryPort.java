@@ -1,7 +1,6 @@
 package com.uuhnaut69.customer.domain.port;
 
 import com.uuhnaut69.customer.domain.entity.Customer;
-
 import java.util.Optional;
 import java.util.UUID;
 

@@ -5,12 +5,11 @@ import com.uuhnaut69.customer.domain.entity.Customer;
 import com.uuhnaut69.customer.domain.exception.NotFoundException;
 import com.uuhnaut69.customer.domain.port.CustomerRepositoryPort;
 import com.uuhnaut69.customer.domain.port.CustomerUseCasePort;
+import java.math.BigDecimal;
+import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.math.BigDecimal;
-import java.util.UUID;
 
 @Service
 @Transactional
@@ -37,9 +36,9 @@ public class CustomerUseCase implements CustomerUseCasePort {
   public boolean reserveBalance(PlacedOrderEvent orderEvent) {
     var customer = findById(orderEvent.customerId());
     if (customer
-            .getBalance()
-            .subtract(orderEvent.price().multiply(BigDecimal.valueOf(orderEvent.quantity())))
-            .compareTo(BigDecimal.ZERO)
+        .getBalance()
+        .subtract(orderEvent.price().multiply(BigDecimal.valueOf(orderEvent.quantity())))
+        .compareTo(BigDecimal.ZERO)
         < 0) {
       return false;
     }
