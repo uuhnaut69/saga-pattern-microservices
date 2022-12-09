@@ -3,11 +3,10 @@ package com.uuhnaut69.customer.infrastructure.repository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.uuhnaut69.customer.domain.entity.Customer;
 import com.uuhnaut69.customer.domain.port.CustomerRepositoryPort;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Repository;
-
 import java.util.Optional;
 import java.util.UUID;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Repository;
 
 @Repository
 @RequiredArgsConstructor

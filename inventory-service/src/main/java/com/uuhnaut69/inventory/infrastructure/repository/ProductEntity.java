@@ -1,13 +1,12 @@
 package com.uuhnaut69.inventory.infrastructure.repository;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import java.util.UUID;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import java.util.UUID;
 
 @Data
 @NoArgsConstructor
@@ -15,7 +14,8 @@ import java.util.UUID;
 @Entity(name = "products")
 public class ProductEntity {
 
-  @Id private UUID id;
+  @Id
+  private UUID id;
 
   @Column(nullable = false)
   private String name;

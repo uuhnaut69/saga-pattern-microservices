@@ -5,12 +5,11 @@ import com.uuhnaut69.inventory.domain.entity.Product;
 import com.uuhnaut69.inventory.domain.exception.NotFoundException;
 import com.uuhnaut69.inventory.domain.port.ProductRepositoryPort;
 import com.uuhnaut69.inventory.domain.port.ProductUseCasePort;
+import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.UUID;
 
 @Slf4j
 @Service

@@ -1,8 +1,7 @@
 package com.uuhnaut69.order.domain.port;
 
-import org.springframework.messaging.Message;
-
 import java.util.function.Consumer;
+import org.springframework.messaging.Message;
 
 public interface EventHandlerPort {
 

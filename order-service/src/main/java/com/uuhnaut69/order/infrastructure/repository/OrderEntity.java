@@ -1,14 +1,17 @@
 package com.uuhnaut69.order.infrastructure.repository;
 
 import com.uuhnaut69.order.domain.entity.OrderStatus;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
-import javax.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.Id;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.UUID;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
@@ -16,7 +19,8 @@ import java.util.UUID;
 @Entity(name = "orders")
 public class OrderEntity {
 
-  @Id private UUID id;
+  @Id
+  private UUID id;
 
   @Column(nullable = false)
   private UUID customerId;
