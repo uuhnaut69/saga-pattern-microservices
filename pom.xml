@@ -21,10 +21,10 @@
   <artifactId>microservices</artifactId>
   <version>1.0.0</version>
   <name>microservices</name>
-  <description>Demo project for Spring Boot</description>
+  <description>Saga Pattern Spring Boot Example</description>
 
   <properties>
-    <java.version>17</java.version>
+    <java.version>19</java.version>
     <spring-cloud.version>2022.0.1</spring-cloud.version>
   </properties>
 
