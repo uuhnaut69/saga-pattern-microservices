@@ -1,6 +1,9 @@
 server:
   port: 9091
 spring:
+  threads:
+    virtual:
+      enabled: true
   application:
     name: customer-service
   jpa:
@@ -23,10 +26,9 @@ spring:
     stream:
       kafka:
         binder:
-          brokers: localhost:29092
+          brokers: localhost:9092
       bindings:
         handleReserveCustomerBalanceRequest-in-0:
           destination: ORDER.events
         handleCompensateCustomerBalanceRequest-in-0:
           destination: ORDER.events
-

@@ -11,10 +11,6 @@
 
   <artifactId>inventory-service</artifactId>
 
-  <properties>
-    <hibernate-types-60.version>2.21.1</hibernate-types-60.version>
-  </properties>
-
   <dependencies>
     <dependency>
       <groupId>org.springframework.boot</groupId>
@@ -26,9 +22,9 @@
       <scope>runtime</scope>
     </dependency>
     <dependency>
-      <artifactId>hibernate-types-60</artifactId>
-      <groupId>com.vladmihalcea</groupId>
-      <version>${hibernate-types-60.version}</version>
+      <groupId>io.hypersistence</groupId>
+      <artifactId>hypersistence-utils-hibernate-63</artifactId>
+      <version>3.7.0</version>
     </dependency>
   </dependencies>
 

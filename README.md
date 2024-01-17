@@ -14,7 +14,7 @@ Simple order flow to demo some concepts:
 
 ## Prerequisites
 
-- `Java 19`
+- `Java 21`
 - `Docker`
 - `Docker-compose`
 
@@ -52,12 +52,12 @@ Run services `api-gateway`, `order-service`, `customer-service`, `inventory-serv
 ./mvnw -f inventory-service/pom.xml spring-boot:run
 ```
 
-| Service's name | Endpoint |
-| --- | --- |
-|Api Gateway | localhost:8080 |
-| Order service | localhost:9090 |
-| Customer service | localhost:9091 |
-| Inventory service | localhost:9092 |
+| Service's name    | Endpoint       |
+| ----------------- | -------------- |
+| Api Gateway       | localhost:8080 |
+| Order service     | localhost:9090 |
+| Customer service  | localhost:9091 |
+| Inventory service | localhost:9093 |
 
 ### Start outbox connectors
 
@@ -75,8 +75,40 @@ Delete all connectors
 sh delete-connectors.sh
 ```
 
-### Todo
+### Usefull commands
 
-- [ ] Authentication
-- [ ] K8s deployment (services/infrastructure)
-- [ ] Web demo
+Create new customer
+
+```shell
+curl --location 'localhost:8080/customer-service/customers' \
+--header 'Content-Type: application/json' \
+--data '{
+    "username": "usertest",
+    "fullName": "Test user 1",
+    "balance": 100
+}'
+```
+
+Create new product
+
+```shell
+curl --location 'localhost:8080/inventory-service/products' \
+--header 'Content-Type: application/json' \
+--data '{
+    "name": "Test product 1",
+    "stocks": 10
+}'
+```
+
+Create new order
+
+```shell
+curl --location 'localhost:8080/order-service/orders' \
+--header 'Content-Type: application/json' \
+--data '{
+    "customerId": "dd42fa59-c3d1-4583-996b-3ce4cc49d9eb",
+    "productId": "5af7affb-eadc-4f94-8c40-2f5e1eceb080",
+    "quantity": 1,
+    "price": 2
+}'
+```

@@ -15,6 +15,7 @@
     "value.converter.schemas.enable": "false",
     "tombstones.on.delete": "false",
     "table.include.list": "public.out_box",
+    "topic.prefix": "order_db",
     "transforms": "outbox",
     "transforms.outbox.type": "io.debezium.transforms.outbox.EventRouter",
     "transforms.outbox.route.topic.replacement": "${routedByValue}.events",

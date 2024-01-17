@@ -44,8 +44,7 @@ public class EventHandlerAdapter implements EventHandlerPort {
 
   private static final String RESERVE_CUSTOMER_BALANCE_FAILED = "RESERVE_CUSTOMER_BALANCE_FAILED";
 
-  private static final String RESERVE_CUSTOMER_BALANCE_SUCCESSFULLY =
-      "RESERVE_CUSTOMER_BALANCE_SUCCESSFULLY";
+  private static final String RESERVE_CUSTOMER_BALANCE_SUCCESSFULLY = "RESERVE_CUSTOMER_BALANCE_SUCCESSFULLY";
 
   @Bean
   @Override

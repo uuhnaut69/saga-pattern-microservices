@@ -38,13 +38,11 @@ public class EventHandlerAdapter implements EventHandlerPort {
 
   private static final String PRODUCT = "PRODUCT";
 
-  private static final String RESERVE_CUSTOMER_BALANCE_SUCCESSFULLY =
-      "RESERVE_CUSTOMER_BALANCE_SUCCESSFULLY";
+  private static final String RESERVE_CUSTOMER_BALANCE_SUCCESSFULLY = "RESERVE_CUSTOMER_BALANCE_SUCCESSFULLY";
 
   private static final String RESERVE_PRODUCT_STOCK_FAILED = "RESERVE_PRODUCT_STOCK_FAILED";
 
-  private static final String RESERVE_PRODUCT_STOCK_SUCCESSFULLY =
-      "RESERVE_PRODUCT_STOCK_SUCCESSFULLY";
+  private static final String RESERVE_PRODUCT_STOCK_SUCCESSFULLY = "RESERVE_PRODUCT_STOCK_SUCCESSFULLY";
 
   @Bean
   @Override
