@@ -35,6 +35,6 @@ public class OutBox {
   private String type;
 
   @Type(JsonType.class)
-  @Column(columnDefinition = "jsonb")
+  @Column(columnDefinition = "json")
   private JsonNode payload;
 }

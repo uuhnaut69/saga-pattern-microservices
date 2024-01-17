@@ -2,7 +2,7 @@
 
 ![CircleCI](https://img.shields.io/circleci/build/github/uuhnaut69/saga-pattern-microservices/master?color=green&logo=circleci&style=for-the-badge)
 ![Maven Central](https://img.shields.io/maven-central/v/org.springframework.boot/spring-boot-starter-parent?color=green&label=spring-boot&logo=spring-boot&style=for-the-badge)
-![Docker Image Version (tag latest semver)](https://img.shields.io/docker/v/confluentinc/cp-kafka/6.2.0?color=green&label=confluent&logo=apache-kafka&logoColor=green&style=for-the-badge)
+![Docker Image Version (tag latest semver)](https://img.shields.io/docker/v/confluentinc/cp-kafka/7.5.0?color=green&label=confluent&logo=apache-kafka&logoColor=green&style=for-the-badge)
 
 Simple order flow to demo some concepts:
 
@@ -11,6 +11,8 @@ Simple order flow to demo some concepts:
 - Saga Pattern (Saga Orchestration): Distributed transaction span multiple services.
 - Outbox Pattern: Avoid dual-writes, no 2PC required using `Kafka`,`Kafka Connect`, `Debezium`
   , `Outbox Event Router`
+
+![Banner](./assets/banner.jpg)
 
 ## Prerequisites
 
@@ -106,9 +108,20 @@ Create new order
 curl --location 'localhost:8080/order-service/orders' \
 --header 'Content-Type: application/json' \
 --data '{
-    "customerId": "dd42fa59-c3d1-4583-996b-3ce4cc49d9eb",
-    "productId": "5af7affb-eadc-4f94-8c40-2f5e1eceb080",
+    "customerId": "f0a000ad-ea44-4fa1-853b-207f9d9abe2c",
+    "productId": "d212c9d6-da3b-4fe2-b016-a852c8a8d32f",
     "quantity": 1,
     "price": 2
 }'
 ```
+
+## Contributing
+
+Pull requests are welcome. For major changes, please open an issue first
+to discuss what you would like to change.
+
+Please make sure to update tests as appropriate.
+
+## License
+
+[MIT](./LICENSE)
