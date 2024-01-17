@@ -77,7 +77,7 @@ Delete all connectors
 sh delete-connectors.sh
 ```
 
-### Usefull commands
+### Useful commands
 
 Create new customer
 
