@@ -1,17 +1,15 @@
 package com.uuhnaut69.order.infrastructure.repository;
 
 import com.uuhnaut69.order.domain.entity.OrderStatus;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.UUID;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.GenericGenerator;
 
 @Data
 @NoArgsConstructor
@@ -20,6 +18,8 @@ import lombok.NoArgsConstructor;
 public class OrderEntity {
 
   @Id
+  @GeneratedValue(generator = "uuid-hibernate-generator")
+  @GenericGenerator(name = "uuid-hibernate-generator", strategy = "org.hibernate.id.UUIDGenerator")
   private UUID id;
 
   @Column(nullable = false)
