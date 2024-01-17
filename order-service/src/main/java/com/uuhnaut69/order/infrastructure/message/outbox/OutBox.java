@@ -1,17 +1,20 @@
 package com.uuhnaut69.order.infrastructure.message.outbox;
 
+import java.util.UUID;
+
+import org.hibernate.annotations.Type;
+
 import com.fasterxml.jackson.databind.JsonNode;
-import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
+
+import io.hypersistence.utils.hibernate.type.json.JsonType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
-import java.util.UUID;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.Type;
 
 @Data
 @Entity
@@ -33,7 +36,7 @@ public class OutBox {
   @Column(nullable = false)
   private String type;
 
-  @Type(JsonBinaryType.class)
-  @Column(columnDefinition = "jsonb")
+  @Type(JsonType.class)
+  @Column(columnDefinition = "json")
   private JsonNode payload;
 }

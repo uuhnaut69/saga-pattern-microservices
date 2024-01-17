@@ -1,5 +1,17 @@
 package com.uuhnaut69.inventory.infrastructure.message;
 
+import java.nio.charset.StandardCharsets;
+import java.sql.Timestamp;
+import java.time.Instant;
+import java.util.Objects;
+import java.util.function.Consumer;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.messaging.Message;
+import org.springframework.messaging.MessageHeaders;
+import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -10,18 +22,9 @@ import com.uuhnaut69.inventory.infrastructure.message.log.MessageLog;
 import com.uuhnaut69.inventory.infrastructure.message.log.MessageLogRepository;
 import com.uuhnaut69.inventory.infrastructure.message.outbox.OutBox;
 import com.uuhnaut69.inventory.infrastructure.message.outbox.OutBoxRepository;
-import java.nio.charset.StandardCharsets;
-import java.sql.Timestamp;
-import java.time.Instant;
-import java.util.Objects;
-import java.util.function.Consumer;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.context.annotation.Bean;
-import org.springframework.messaging.Message;
-import org.springframework.messaging.MessageHeaders;
-import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
 @Component
@@ -38,13 +41,11 @@ public class EventHandlerAdapter implements EventHandlerPort {
 
   private static final String PRODUCT = "PRODUCT";
 
-  private static final String RESERVE_CUSTOMER_BALANCE_SUCCESSFULLY =
-      "RESERVE_CUSTOMER_BALANCE_SUCCESSFULLY";
+  private static final String RESERVE_CUSTOMER_BALANCE_SUCCESSFULLY = "RESERVE_CUSTOMER_BALANCE_SUCCESSFULLY";
 
   private static final String RESERVE_PRODUCT_STOCK_FAILED = "RESERVE_PRODUCT_STOCK_FAILED";
 
-  private static final String RESERVE_PRODUCT_STOCK_SUCCESSFULLY =
-      "RESERVE_PRODUCT_STOCK_SUCCESSFULLY";
+  private static final String RESERVE_PRODUCT_STOCK_SUCCESSFULLY = "RESERVE_PRODUCT_STOCK_SUCCESSFULLY";
 
   @Bean
   @Override
@@ -82,8 +83,7 @@ public class EventHandlerAdapter implements EventHandlerPort {
   private PlacedOrderEvent deserialize(String event) {
     PlacedOrderEvent placedOrderEvent;
     try {
-      String unescaped = mapper.readValue(event, String.class);
-      placedOrderEvent = mapper.readValue(unescaped, PlacedOrderEvent.class);
+      placedOrderEvent = mapper.readValue(event, PlacedOrderEvent.class);
     } catch (JsonProcessingException e) {
       throw new RuntimeException("Couldn't deserialize event", e);
     }

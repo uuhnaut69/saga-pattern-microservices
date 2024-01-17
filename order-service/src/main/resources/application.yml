@@ -1,6 +1,9 @@
 server:
   port: 9090
 spring:
+  threads:
+    virtual:
+      enabled: true
   application:
     name: order-service
   jpa:
@@ -23,7 +26,7 @@ spring:
     stream:
       kafka:
         binder:
-          brokers: localhost:29092
+          brokers: localhost:9092
       bindings:
         reserveCustomerBalanceStage-in-0:
           destination: CUSTOMER.events

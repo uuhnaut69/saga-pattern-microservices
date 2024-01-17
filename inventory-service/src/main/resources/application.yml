@@ -1,6 +1,9 @@
 server:
-  port: 9092
+  port: 9093
 spring:
+  threads:
+    virtual:
+      enabled: true
   application:
     name: inventory-service
   jpa:
@@ -23,7 +26,7 @@ spring:
     stream:
       kafka:
         binder:
-          brokers: localhost:29092
+          brokers: localhost:9092
       bindings:
         handleReserveProductStockRequest-in-0:
           destination: ORDER.events

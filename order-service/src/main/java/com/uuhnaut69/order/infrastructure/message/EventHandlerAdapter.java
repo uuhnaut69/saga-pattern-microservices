@@ -1,5 +1,17 @@
 package com.uuhnaut69.order.infrastructure.message;
 
+import java.nio.charset.StandardCharsets;
+import java.sql.Timestamp;
+import java.time.Instant;
+import java.util.Objects;
+import java.util.function.Consumer;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.messaging.Message;
+import org.springframework.messaging.MessageHeaders;
+import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -10,18 +22,9 @@ import com.uuhnaut69.order.infrastructure.message.log.MessageLog;
 import com.uuhnaut69.order.infrastructure.message.log.MessageLogRepository;
 import com.uuhnaut69.order.infrastructure.message.outbox.OutBox;
 import com.uuhnaut69.order.infrastructure.message.outbox.OutBoxRepository;
-import java.nio.charset.StandardCharsets;
-import java.sql.Timestamp;
-import java.time.Instant;
-import java.util.Objects;
-import java.util.function.Consumer;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.context.annotation.Bean;
-import org.springframework.messaging.Message;
-import org.springframework.messaging.MessageHeaders;
-import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
 @Component
@@ -40,13 +43,11 @@ public class EventHandlerAdapter implements EventHandlerPort {
 
   public static final String ORDER_CREATED = "ORDER_CREATED";
 
-  private static final String RESERVE_CUSTOMER_BALANCE_SUCCESSFULLY =
-      "RESERVE_CUSTOMER_BALANCE_SUCCESSFULLY";
+  private static final String RESERVE_CUSTOMER_BALANCE_SUCCESSFULLY = "RESERVE_CUSTOMER_BALANCE_SUCCESSFULLY";
 
   private static final String RESERVE_CUSTOMER_BALANCE_FAILED = "RESERVE_CUSTOMER_BALANCE_FAILED";
 
-  private static final String RESERVE_PRODUCT_STOCK_SUCCESSFULLY =
-      "RESERVE_PRODUCT_STOCK_SUCCESSFULLY";
+  private static final String RESERVE_PRODUCT_STOCK_SUCCESSFULLY = "RESERVE_PRODUCT_STOCK_SUCCESSFULLY";
 
   private static final String RESERVE_PRODUCT_STOCK_FAILED = "RESERVE_PRODUCT_STOCK_FAILED";
 
@@ -62,13 +63,12 @@ public class EventHandlerAdapter implements EventHandlerPort {
         var placedOrderEvent = deserialize(event.getPayload());
         var eventType = getHeaderAsString(event.getHeaders(), "eventType");
         if (eventType.equals(RESERVE_CUSTOMER_BALANCE_SUCCESSFULLY)) {
-          var outbox =
-              OutBox.builder()
-                  .aggregateId(placedOrderEvent.id())
-                  .payload(mapper.convertValue(placedOrderEvent, JsonNode.class))
-                  .aggregateType(ORDER)
-                  .type(RESERVE_CUSTOMER_BALANCE_SUCCESSFULLY)
-                  .build();
+          var outbox = OutBox.builder()
+              .aggregateId(placedOrderEvent.id())
+              .payload(mapper.convertValue(placedOrderEvent, JsonNode.class))
+              .aggregateType(ORDER)
+              .type(RESERVE_CUSTOMER_BALANCE_SUCCESSFULLY)
+              .build();
           outBoxRepository.save(outbox);
         } else if (eventType.equals(RESERVE_CUSTOMER_BALANCE_FAILED)) {
           orderUseCase.updateOrderStatus(placedOrderEvent.id(), false);
@@ -93,13 +93,12 @@ public class EventHandlerAdapter implements EventHandlerPort {
           orderUseCase.updateOrderStatus(placedOrderEvent.id(), true);
         } else if (eventType.equals(RESERVE_PRODUCT_STOCK_FAILED)) {
           orderUseCase.updateOrderStatus(placedOrderEvent.id(), false);
-          var outbox =
-              OutBox.builder()
-                  .aggregateId(placedOrderEvent.id())
-                  .aggregateType(ORDER)
-                  .type(COMPENSATE_CUSTOMER_BALANCE)
-                  .payload(mapper.convertValue(placedOrderEvent, JsonNode.class))
-                  .build();
+          var outbox = OutBox.builder()
+              .aggregateId(placedOrderEvent.id())
+              .aggregateType(ORDER)
+              .type(COMPENSATE_CUSTOMER_BALANCE)
+              .payload(mapper.convertValue(placedOrderEvent, JsonNode.class))
+              .build();
           outBoxRepository.save(outbox);
         }
 
@@ -112,8 +111,7 @@ public class EventHandlerAdapter implements EventHandlerPort {
   private PlacedOrderEvent deserialize(String event) {
     PlacedOrderEvent placedOrderEvent;
     try {
-      String unescaped = mapper.readValue(event, String.class);
-      placedOrderEvent = mapper.readValue(unescaped, PlacedOrderEvent.class);
+      placedOrderEvent = mapper.readValue(event, PlacedOrderEvent.class);
     } catch (JsonProcessingException e) {
       throw new RuntimeException("Couldn't deserialize event", e);
     }
