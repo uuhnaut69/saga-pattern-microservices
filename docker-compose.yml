@@ -13,6 +13,7 @@ services:
   orderdb:
     container_name: orderdb
     image: debezium/postgres:11
+    platform: ${PLATFORM:-linux/amd64}
     ports:
       - "5432:5432"
     environment:
@@ -24,6 +25,7 @@ services:
   customerdb:
     container_name: customerdb
     image: debezium/postgres:11
+    platform: ${PLATFORM:-linux/amd64}
     ports:
       - "5433:5432"
     environment:
@@ -35,6 +37,7 @@ services:
   inventorydb:
     container_name: inventorydb
     image: debezium/postgres:11
+    platform: ${PLATFORM:-linux/amd64}
     ports:
       - "5434:5432"
     environment:
@@ -45,6 +48,7 @@ services:
 
   broker:
     image: confluentinc/cp-server:7.5.0
+    platform: ${PLATFORM:-linux/amd64}
     hostname: broker
     container_name: broker
     ports:
@@ -75,6 +79,7 @@ services:
 
   connect:
     image: confluentinc/cp-kafka-connect:7.5.0
+    platform: ${PLATFORM:-linux/amd64}
     hostname: connect
     container_name: connect
     depends_on:
@@ -109,6 +114,7 @@ services:
 
   control-center:
     image: confluentinc/cp-enterprise-control-center:7.5.0
+    platform: ${PLATFORM:-linux/amd64}
     hostname: control-center
     container_name: control-center
     depends_on:
