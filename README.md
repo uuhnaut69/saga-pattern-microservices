@@ -122,6 +122,19 @@ curl --location 'localhost:8080/order-service/orders' \
     "price": 2
 }'
 ```
+### Observation
+
+### Monitoring
+
+Access http://localhost:3000/d/saga_patterns/saga-patterns?orgId=1  to see the monitoring dashboard
+
+### Log
+
+Access http://localhost:3000/explore and choose ```Loki``` as data source to see the logs
+
+### Tracing
+
+Access http://localhost:3000/explore and choose ```Tempo``` as data source to see the traces
 
 ## Contributing
 

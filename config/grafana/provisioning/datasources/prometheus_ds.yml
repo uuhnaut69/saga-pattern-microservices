@@ -1,0 +1,38 @@
+datasources:
+  - name: SagaPrometheus
+    access: proxy
+    type: prometheus
+    url: http://prometheus:9090
+    isDefault: true
+  - name: Tempo
+    type: tempo
+    uid: tempo
+    access: proxy
+    orgId: 1
+    url: http://tempo:3200
+    basicAuth: false
+    isDefault: true
+    version: 1
+    editable: false
+    apiVersion: 1
+    jsonData:
+      httpMethod: GET
+      serviceMap:
+        datasourceUid: prometheus
+  - name: Loki
+    type: loki
+    uid: loki
+    access: proxy
+    orgId: 1
+    url: http://loki:3100
+    basicAuth: false
+    isDefault: false
+    version: 1
+    editable: true
+    jsonData:
+      derivedFields:
+        - datasourceName: Tempo
+          datasourceUid: tempo
+          matcherRegex: trace_id=(\w+)
+          name: traceID
+          url: '$${__value.raw}'

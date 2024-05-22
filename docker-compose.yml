@@ -135,3 +135,47 @@ services:
       CONFLUENT_METRICS_TOPIC_REPLICATION: 1
       PORT: 9021
     restart: on-failure
+  prometheus:
+    image: prom/prometheus
+    platform: ${PLATFORM:-linux/amd64}
+    ports:
+      - "9094:9090"
+    volumes:
+      - ./config/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+    extra_hosts:
+      - "host.docker.internal:host-gateway" #for linux
+  grafana:
+    image: grafana/grafana
+    platform: ${PLATFORM:-linux/amd64}
+    depends_on:
+      - prometheus
+      - tempo
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_AUTH_ANONYMOUS_ENABLED=true
+      - GF_AUTH_ANONYMOUS_ORG_ROLE=Admin
+      - GF_AUTH_DISABLE_LOGIN_FORM=true
+      - GF_FEATURE_TOGGLES_ENABLE=traceqlEditor
+    volumes:
+      - ./config/grafana/provisioning/datasources:/etc/grafana/provisioning/datasources
+      - ./config/grafana/provisioning/dashboards:/etc/grafana/provisioning/dashboards
+      - ./config/grafana/dashboards:/etc/grafana/dashboards
+  tempo:
+    image: grafana/tempo
+    platform: ${PLATFORM:-linux/amd64}
+    container_name: tempo
+    ports:
+      - "9411:9411"   # jaeger http
+    volumes:
+      - ./config/tempo/tempo-local.yaml:/etc/tempo-local.yaml
+    command: [ "-config.file=/etc/tempo-local.yaml" ]
+  loki:
+    image: grafana/loki
+    platform: ${PLATFORM:-linux/amd64}
+    container_name: loki
+    ports:
+      - "3100:3100"
+    command: -config.file=/etc/loki/local-config.yaml
