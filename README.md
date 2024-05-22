@@ -24,9 +24,17 @@ Simple order flow to demo some concepts:
 
 ### Setup environment
 
+#### AMD
+
 ```shell
-docker-compose up -d
+export PLATFORM=linux/amd64 && docker-compose up -d
 ```
+#### ARM
+
+```shell
+export PLATFORM=linux/arm64 && docker-compose up -d
+```
+
 
 ### Build projects
 
