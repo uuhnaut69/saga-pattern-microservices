@@ -12,7 +12,7 @@ Simple order flow to demo some concepts:
 - Outbox Pattern: Avoid dual-writes, no 2PC required using `Kafka`,`Kafka Connect`, `Debezium`
   , `Outbox Event Router`
 
-![Banner](./assets/banner.jpg)
+![Banner](./assets/banner.jpg){ width=100% }
 
 ## Prerequisites
 
