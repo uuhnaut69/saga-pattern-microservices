@@ -37,3 +37,7 @@ spring:
           uri: lb://inventory-service
           predicates:
             - Path=/inventory-service/**
+        - id: delivery-service
+          uri: lb://delivery-service
+          predicates:
+            - Path=/delivery-service/**

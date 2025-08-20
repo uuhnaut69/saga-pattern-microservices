@@ -1,0 +1,32 @@
+server:
+  port: 9095
+spring:
+  threads:
+    virtual:
+      enabled: true
+  application:
+    name: delivery-service
+  jpa:
+    show-sql: false
+    open-in-view: false
+    hibernate:
+      ddl-auto: update
+      use-new-id-generator-mappings: true
+    generate-ddl: true
+  datasource:
+    url: jdbc:postgresql://localhost:5436/postgres
+    username: postgres
+    password: postgres
+  cloud:
+    consul:
+      host: ${CONSUL_HOST:localhost}
+      port: ${CONSUL_PORT:8500}
+    function:
+      definition: handleCreateDeliveryRequest
+    stream:
+      kafka:
+        binder:
+          brokers: localhost:9092
+      bindings:
+        handleCreateDeliveryRequest-in-0:
+          destination: ORDER.events

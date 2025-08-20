@@ -46,6 +46,18 @@ services:
       - POSTGRES_PASSWORD=postgres
     restart: on-failure
 
+  deliverydb:
+    container_name: deliverydb
+    image: debezium/postgres:11
+    platform: ${PLATFORM:-linux/amd64}
+    ports:
+      - "5436:5432"
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    restart: on-failure
+
   broker:
     image: confluentinc/cp-server:7.5.0
     platform: ${PLATFORM:-linux/amd64}
