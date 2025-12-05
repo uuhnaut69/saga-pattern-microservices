@@ -22,11 +22,11 @@ spring:
       host: ${CONSUL_HOST:localhost}
       port: ${CONSUL_PORT:8500}
     function:
-      definition: startSaga;reserveCustomerBalanceStage;reserveProductStockStage
+      definition: reserveCustomerBalanceStage;reserveProductStockStage
     stream:
       kafka:
         binder:
-          brokers: localhost:9092
+          brokers: localhost:19092
       bindings:
         reserveCustomerBalanceStage-in-0:
           destination: CUSTOMER.events

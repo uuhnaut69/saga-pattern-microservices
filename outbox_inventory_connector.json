@@ -2,7 +2,7 @@
   "name": "inventory_outbox_connector",
   "config": {
     "connector.class": "io.debezium.connector.postgresql.PostgresConnector",
-    "database.hostname": "inventorydb",
+    "database.hostname": "inventory_db",
     "database.port": "5432",
     "database.user": "postgres",
     "database.password": "postgres",

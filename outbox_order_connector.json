@@ -2,7 +2,7 @@
   "name": "order_outbox_connector",
   "config": {
     "connector.class": "io.debezium.connector.postgresql.PostgresConnector",
-    "database.hostname": "orderdb",
+    "database.hostname": "order_db",
     "database.port": "5432",
     "database.user": "postgres",
     "database.password": "postgres",
