@@ -21,6 +21,9 @@ spring:
     consul:
       host: ${CONSUL_HOST:localhost}
       port: ${CONSUL_PORT:8500}
+      discovery:
+        prefer-ip-address: false
+        hostname: ${SERVICE_HOSTNAME:host.docker.internal}
     function:
       definition: handleReserveProductStockRequest
     stream:

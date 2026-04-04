@@ -69,6 +69,9 @@ Run services `api-gateway`, `order-service`, `customer-service`, `inventory-serv
 | Customer service  | localhost:9091 |
 | Inventory service | localhost:9093 |
 
+
+> Note: service discovery now defaults to `localhost` for local development. If you run services in Docker and need a different address, set `SERVICE_HOSTNAME` before starting each service (for example `export SERVICE_HOSTNAME=host.docker.internal`).
+
 ### Start outbox connectors
 
 Create outbox connectors
